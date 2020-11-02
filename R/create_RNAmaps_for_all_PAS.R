@@ -6,7 +6,7 @@ library(rtracklayer)
 #' iCLIP RNAmaps for all PAS
 #' 
 #' Create RNAmaps at sPASs, pPASs and dPASs for two iCLIP libraries.
-#' @param PASs.gr A GRanges object containing exact positions of PASs. Metadata columns have to include the type of each PAS (i.e. sPAS, pPAS or dPAS).
+#' @param PASs.gr A GRanges object containing exact positions of PASs as single nucleotide region. A metadata column called "PAS.type" is required  for each region and should be either sPAS, pPAS or dPAS.
 #' @param iCLIP1.plus.bw Path to the BigWig-File of the plus strand for iCLIP library 1.
 #' @param iCLIP1.minus.bw Path to the BigWig-File of the minus strand for iCLIP library 1.
 #' @param iCLIP2.plus.bw Path to the BigWig-File of the plus strand for iCLIP library 2.
