@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create RNAmaps at sPASs, pPASs and dPASs for two iCLIP...</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: iCLIP RNAmaps for all PAS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for create_RNAmaps_for_all_PAS"><tr><td>create_RNAmaps_for_all_PAS</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Create RNAmaps at sPASs, pPASs and dPASs for two iCLIP libraries.</h2>
+<h2>iCLIP RNAmaps for all PAS</h2>
 
 <h3>Description</h3>
 
@@ -64,8 +64,7 @@ create_RNAmaps_for_all_PAS(
 
 <h3>Details</h3>
 
-<p>BigWig-Files are loaded as Rle, which allows a fast subsetting via the regions in the GRanges object.
-For the comparison of iCLIP signals of the two libraries a two proportions Z-test is performed. Positions with a significant signal difference (adjusted P value &lt;= 0.01) are indicated in black beneath the signals.
+<p>For each PAS type (i.e. sPAS, pPAS and dPAS) RNA maps for two iCLIP libraries are generated in a user-defined window. For comparison of signal differences between the two iCLIP libraries, two proportions Z-tests are performed for each position. Positions with a significant signal difference (adjusted P value &lt;= 0.01) are indicated in black beneath the signals.
 </p>
 
 

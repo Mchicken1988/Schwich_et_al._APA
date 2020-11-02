@@ -13,8 +13,8 @@ library(rtracklayer)
 #' @param iCLIP2.minus.bw Path to the BigWig-File of the minus strand for iCLIP library 2.
 #' @param upstream Number of upstream nucleotides to include in the RNAmap.
 #' @param downstream Number of downstream nucleotides to include in the RNAmap.
-#' @details BigWig-Files are loaded as Rle, which allows a fast subsetting via the regions in the GRanges object.
-#'    For the comparison of iCLIP signals of the two libraries a two proportions Z-test is performed. Positions with a significant signal difference (adjusted P value <= 0.01) are indicated in black beneath the signals.   
+#' @details For each PAS type (i.e. sPAS, pPAS and dPAS) RNA maps for two iCLIP libraries are generated in a user-defined window. For comparison of signal differences between the two iCLIP libraries, two proportions Z-tests are performed for each position. Positions with a significant signal difference (adjusted P value <= 0.01) are indicated in black beneath the signals.    
+#' 
 #' @return RNAmap plot
 #'
 #' @import GenomicRanges
