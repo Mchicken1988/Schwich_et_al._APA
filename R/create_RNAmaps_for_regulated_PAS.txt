@@ -1,0 +1,70 @@
+iCLIP RNAmaps for regulated PAS
+
+Description:
+
+     Create RNAmaps at pPASs and dPASs of transcripts with changes in
+     3'UTR length for two iCLIP libraries.
+
+Usage:
+
+     create_RNAmaps_for_regulated_PAS(
+       PASs.gr,
+       iCLIP1.plus.bw,
+       iCLIP1.minus.bw,
+       iCLIP2.plus.bw,
+       iCLIP2.minus.bw,
+       upstream = 450,
+       downstream = 150,
+       DaPars = c("SRSF3", "SRSF7", "CPSF6", "Diff"),
+       UTR3.length = c("shorter", "longer")
+     )
+     
+Arguments:
+
+ PASs.gr: A GRanges object containing exact positions of PASs. Required
+          metadata columns are 'PAS.type' as well as
+          'new.DaPars.SRSF3.regulation', 'new.DaPars.SRSF7.regulation',
+          'new.DaPars.CPSF6.regulation' and
+          'new.DaPars.Diff.regulation', which indicate the change in
+          3'UTR length of the hosting transcript in the different
+          DaPars comparisons.
+
+iCLIP1.plus.bw: Path to the BigWig-File of the plus strand for iCLIP
+          library 1.
+
+iCLIP1.minus.bw: Path to the BigWig-File of the minus strand for iCLIP
+          library 1.
+
+iCLIP2.plus.bw: Path to the BigWig-File of the plus strand for iCLIP
+          library 2.
+
+iCLIP2.minus.bw: Path to the BigWig-File of the minus strand for iCLIP
+          library 2.
+
+upstream: Number of upstream nucleotides to include in the RNAmap.
+
+downstream: Number of downstream nucleotides to include in the RNAmap.
+
+  DaPars: The DaPars comparison to look at. Choices are 'SRSF3' (Srsf3
+          KD/Ctrl), 'SRSF7' (Srsf7 KD/Ctrl), 'CPSF6' (Cpsf6 KD/Ctrl)
+          and 'Diff' (Diff/Undiff).
+
+UTR3.length: The set of transcripts to look at. Choices are 'shorter'
+          (3'UTRs are getting shorter in the respective DaPars
+          comparison) and 'longer' (3'UTRs are getting longer in the
+          respective DaPars comparison).
+
+Details:
+
+     RNAmaps at pPASs and dPASs of transcripts with changes in 3'UTR
+     length are generated for two iCLIP libraries in a user-defined
+     window. In addition, for each PAS type and iCLIP library binding
+     signals at not affected PASs are shown. Significant signal
+     differences (adjusted P value <= 0.01) between regulated and not
+     regulated PASs are indicated in black beneath the signals.
+
+Value:
+
+     RNAmap plot
+
+

@@ -13,7 +13,7 @@ library(rtracklayer)
 #' @param iCLIP2.minus.bw Path to the BigWig-File of the minus strand for iCLIP library 2.
 #' @param upstream Number of upstream nucleotides to include in the RNAmap.
 #' @param downstream Number of downstream nucleotides to include in the RNAmap.
-#' @details For each PAS type (i.e. sPAS, pPAS and dPAS) RNA maps for two iCLIP libraries are generated in a user-defined window. For comparison of signal differences between the two iCLIP libraries, two proportions Z-tests are performed for each position. Positions with a significant signal difference (adjusted P value <= 0.01) are indicated in black beneath the signals.    
+#' @details For each PAS type (i.e. sPAS, pPAS and dPAS) RNAmaps for two iCLIP libraries are generated in a user-defined window. For comparison of signal differences between the two iCLIP libraries, two proportions Z-tests are performed for each position. Positions with a significant signal difference (adjusted P value <= 0.01) are indicated in black beneath the signals.    
 #' 
 #' @return RNAmap plot
 #'
@@ -155,16 +155,6 @@ create_RNAmaps_for_all_PAS <- function(PASs.gr, iCLIP1.plus.bw, iCLIP1.minus.bw,
   rna.map.plot.df$PAS.type <- factor(rna.map.plot.df$PAS.type, levels = c("PAS", "pPAS", "dPAS"), labels =c("sPAS", "pPAS", "dPAS"))
   rna.map.plot.df$iCLIP.lib <- factor(rna.map.plot.df$iCLIP.lib, levels = c("iCLIP1", "iCLIP2"))
   
-  #Determine the number of PASs per PAS type 
-  n1 <- nrow(iCLIP1.Xlinks.m[which(PASs.gr$new.PAS == "pPAS"),])
-  n2 <- nrow(iCLIP1.Xlinks.m[which(PASs.gr$new.PAS == "dPAS"),])
-  n3 <- nrow(iCLIP1.Xlinks.m[which(PASs.gr$new.PAS == "PAS"),])
-  
-  #Create an annotation dataframe
-  anno.text.df <- data.frame(n=c(n1,n2,n3), PAS.type=c("pPAS","dPAS", "PAS"),
-                             x=-300, y=10, iCLIP.lib = "iCLIP1")
-  anno.text.df$PAS.type <- factor(anno.text.df$PAS.type, levels = c("PAS", "pPAS", "dPAS"), labels =c("sPAS", "pPAS", "dPAS"))
-  
   #Create the dataframe with the significant positions
   adj.pvalues.plot <- data.frame(x=-450:150,
                                  PAS.type=c(rep("PAS",length(PAS.adj.pvalues)),
@@ -181,11 +171,10 @@ create_RNAmaps_for_all_PAS <- function(PASs.gr, iCLIP1.plus.bw, iCLIP1.minus.bw,
   
   rna.map.plot <- ggplot(rna.map.plot.df, aes(x=x, y=y, col = iCLIP.lib)) +
     facet_wrap(facets = vars(PAS.type), ncol=3) +
-    geom_text(data = anno.text.df, mapping = aes(x = x, y = y, label=paste0("n = ", n)), col = "black") +
     scale_x_continuous(breaks = seq(-400, 100, by = 100)) +
-    coord_cartesian(xlim = c(-400,100), ylim = c(0, 10)) +
+    coord_cartesian(xlim = c(-400,100)) +
     scale_color_manual(values = c("iCLIP1" = "#0042FF", "iCLIP2" = "#F79320")) +
-    labs(x = "distance to PAS (nt)", y = "Normalized iCLIP signal", title = "Crosslinks (all)") + 
+    labs(x = "distance to PAS (nt)", y = "Normalized iCLIP signal") + 
     geom_vline(xintercept = 0, linetype="dashed", size = 0.25) +
     geom_line(alpha=0.6) +
     geom_smooth(size = 1, method = "loess", span=0.1, se = FALSE) +
