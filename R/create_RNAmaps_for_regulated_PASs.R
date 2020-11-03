@@ -212,8 +212,7 @@ create_RNAmaps_for_regulated_PAS <- function(PASs.gr, iCLIP1.plus.bw, iCLIP1.min
   
   rna.map.plot <- ggplot(rna.map.plot.df, aes(x=x, y=y)) +
     facet_wrap(facets = vars(iCLIP.lib:PAS.type), ncol = 2, nrow =2) +
-    scale_x_continuous(breaks = seq(-400, 100, by = 100)) +
-    coord_cartesian(xlim = c(-400, 100)) +
+    coord_cartesian(xlim = c(-(upstream-50), (downstream-50))) +
     scale_color_manual(values = c("iCLIP1:real" = "#0042FF", "iCLIP2:real" = "#F79320", "iCLIP1:background" = "grey","iCLIP2:background" = "grey")) +
     scale_fill_manual(values = c("iCLIP1:background" = "grey","iCLIP2:background" = "grey")) +
     labs(x = "distance to PAS (nt)", y = "Normalized iCLIP signal") + 

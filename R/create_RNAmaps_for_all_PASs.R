@@ -6,7 +6,7 @@ library(rtracklayer)
 #' iCLIP RNAmaps for all PAS
 #' 
 #' Create RNAmaps at sPASs, pPASs and dPASs for two iCLIP libraries.
-#' @param PASs.gr A GRanges object containing exact positions of PASs as single nucleotide region. A metadata column called "PAS.type" is required  for each region and should be either sPAS, pPAS or dPAS.
+#' @param PASs.gr A GRanges object containing exact positions of PASs as single nucleotide region. A metadata column called "PAS.type" is required for each region and should be either sPAS, pPAS or dPAS.
 #' @param iCLIP1.plus.bw Path to the BigWig-File of the plus strand for iCLIP library 1.
 #' @param iCLIP1.minus.bw Path to the BigWig-File of the minus strand for iCLIP library 1.
 #' @param iCLIP2.plus.bw Path to the BigWig-File of the plus strand for iCLIP library 2.
@@ -171,8 +171,7 @@ create_RNAmaps_for_all_PAS <- function(PASs.gr, iCLIP1.plus.bw, iCLIP1.minus.bw,
   
   rna.map.plot <- ggplot(rna.map.plot.df, aes(x=x, y=y, col = iCLIP.lib)) +
     facet_wrap(facets = vars(PAS.type), ncol=3) +
-    scale_x_continuous(breaks = seq(-400, 100, by = 100)) +
-    coord_cartesian(xlim = c(-400,100)) +
+    coord_cartesian(xlim = c(-(upstream-50),(downstream-50))) +
     scale_color_manual(values = c("iCLIP1" = "#0042FF", "iCLIP2" = "#F79320")) +
     labs(x = "distance to PAS (nt)", y = "Normalized iCLIP signal") + 
     geom_vline(xintercept = 0, linetype="dashed", size = 0.25) +
